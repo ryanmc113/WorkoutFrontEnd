@@ -21,11 +21,7 @@ export class UserFormComponent {
         private userService: UserService) {
     this.user = new User();
   }
-  // this comment 
-
-  // here is a new comment again
-
-  //try this again
+  
   onSubmit() {
     this.userService.save(this.user).subscribe(result => this.gotoUserList());
   }
