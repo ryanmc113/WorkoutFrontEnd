@@ -4,48 +4,35 @@ import { SignInButtonComponent } from '../sign-in-button/sign-in-button.componen
 import { Router } from '@angular/router';
 import { AuthServiceService } from '../../services/auth-service.service';
 import { User } from '../../model/user';
-import { UserService } from '../../services/user-service.service';
 
 
 
 @Component({
   selector: 'app-login',
-  imports: [SignInButtonComponent, FormsModule, AuthServiceService],
+  imports: [SignInButtonComponent, FormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  email: string = '';
-  password: string = '';
-  username: string = '';
 
   user: User = new User();
 
-  constructor(private router: Router, private authService: AuthServiceService, private userService: UserService ) { 
+  constructor(private router: Router, private authService: AuthServiceService) { 
     this.user = new User();
   }
 
-  ngOnInit() {
-    this.username = "John";
-  }
-
-  signIn(){
-    console.log('line 15')
-  }
-
-  onSubmit() {
-    this.router.navigate(['/user-page']);
-  }
+  // ngOnInit() {
+  //   this.username = "John";
+  // }
 
   login() {
     const val = this.user;
-
+    console.log(val);
     if (val.email && val.password) {
         this.authService.login(val.email, val.password)
             .subscribe(
                 () => {
-                    console.log("User is logged in");
-                    this.router.navigateByUrl('/');
+                    this.router.navigate(['/user-page/users']);
                 }
             );
     }

@@ -11,13 +11,15 @@ import { tap, shareReplay } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthServiceService {
+  private usersUrl: string;
 
   constructor(private http: HttpClient) {
+    this.usersUrl = 'http://localhost:8080';
 
   }
 
   login(email:string, password:string ) {
-      return this.http.post<User>('/api/login', {email, password})
+      return this.http.post<User>(this.usersUrl+'/auth/login', {email, password})
       .pipe(
         tap(res => this.setSession(res)),
         shareReplay()
