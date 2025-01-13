@@ -1,10 +1,12 @@
-import { Injectable } from '@angular/core';
+import { Injectable, PLATFORM_ID, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../model/user';
 import { Observable } from 'rxjs';
 import moment from "moment";
 import { tap, shareReplay } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
+import { isPlatformBrowser } from '@angular/common';
+import { LoginServiceService } from './login-service.service';
 
 
 
@@ -14,10 +16,10 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class AuthServiceService {
   private usersUrl: string;
-  private loggedIn = new BehaviorSubject<boolean>(false);
+  private loggedIn = false
 
 
-  constructor(private http: HttpClient) {
+  constructor(@Inject(PLATFORM_ID) private platformId: Object,private http: HttpClient, private loginService: LoginServiceService) {
     this.usersUrl = 'http://localhost:8080';
 
   }
@@ -27,33 +29,26 @@ export class AuthServiceService {
       .pipe(
         tap(res => {
           this.setSession(res);
-          this.loggedIn.next(true);
+          this.loginService.setLoggedIn(true);
         }),
         shareReplay()
       );
   }
         
-  private setSession(authResult: { expiresIn: any; idToken: string; }) {
+  private setSession(authResult: { expiresIn: any; token: string; }) {
       const expiresAt = moment().add(authResult.expiresIn,'second');
-      console.log(typeof localStorage);
-      if (typeof localStorage !== 'undefined') {
-        localStorage.setItem('id_token', authResult.idToken);
-        localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()) );
+      
+      if (isPlatformBrowser(this.platformId)) {
+        sessionStorage.setItem('token', authResult.token);
+        sessionStorage.setItem("expiresIn", JSON.stringify(expiresAt.valueOf()) );
       }
 
   }          
 
-  // private getSession(): { idToken: string, expiresAt: string } {
-  //   const idToken = localStorage.getItem('id_token') || '';
-  //   const expiresAt = localStorage.getItem('expires_at') || '';
-  
-  //   return { idToken, expiresAt };
-  // }
-
   logout() {
-    if (typeof localStorage !== 'undefined') {
-      localStorage.removeItem('id_token');
-      localStorage.removeItem('expires_at');
+    if (isPlatformBrowser(this.platformId)) {
+      sessionStorage.removeItem('id_token');
+      sessionStorage.removeItem('expires_at');
     }
   }
 
@@ -69,13 +64,13 @@ export class AuthServiceService {
 
   getExpiration() {
      var expiresAt = moment().subtract(1, 'days').format();
-    if (typeof localStorage !== 'undefined') {
-      const expiration = localStorage.getItem("expires_at") || '';
+     if (isPlatformBrowser(this.platformId)) {
+      const expiration = sessionStorage.getItem("expires_at") || '';
        expiresAt = JSON.parse(expiration);
        return moment(expiresAt);
-    }else{
-      return expiresAt;
-    }
+      }else{
+        return expiresAt;
+      }
       
   }    
 }

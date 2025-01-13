@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { AuthServiceService } from '../../services/auth-service.service';
+import { Component,Injectable, PLATFORM_ID, Inject  } from '@angular/core';
+import { CommonModule,isPlatformBrowser } from '@angular/common';
+import { LoginServiceService } from '../../services/login-service.service';
+
+
 
 
 @Component({
@@ -12,8 +14,17 @@ import { AuthServiceService } from '../../services/auth-service.service';
 export class HeaderComponent {
    userLoggedIn = false;
 
-   constructor(private authService: AuthServiceService) {
-    this.userLoggedIn = this.authService.isLoggedIn();
+   constructor(@Inject(PLATFORM_ID) private platformId: Object, 
+                private loginService: LoginServiceService) {
+                  this.loginService.isLoggedIn.subscribe(loggedIn => {
+                    this.userLoggedIn = loggedIn;
+                  });    
   }
+
+  // ngOnInit() {
+  //   if (isPlatformBrowser(this.platformId)) {
+  //     this.userLoggedIn = this.authService.isLoggedIn();
+  //   }
+  // }
 
 }

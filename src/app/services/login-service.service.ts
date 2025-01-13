@@ -3,7 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../model/user';
 import { Observable } from 'rxjs';
-import { AuthServiceService } from './auth-service.service';
+import { BehaviorSubject } from 'rxjs';
+
 
 
 
@@ -12,28 +13,19 @@ import { AuthServiceService } from './auth-service.service';
 })
 export class LoginServiceService {
   user: User = new User();
+  private userLoggedIn = new BehaviorSubject<boolean>(false);
 
-  constructor(private http: HttpClient, private authService: AuthServiceService, private router: Router) {
+  constructor(private http: HttpClient, private router: Router) {
     this.user = new User();
   }
 
-     
+  get isLoggedIn() {
+    return this.userLoggedIn.asObservable();
+  }
 
-  
+  setLoggedIn(value: boolean) {
+    this.userLoggedIn.next(value);
+  }
 
-  // login() {
-  //     const val = this.user;
-
-  //     if (val.email && val.password) {
-  //         this.authService.login(val.email, val.password)
-  //             .subscribe(
-  //                 () => {
-  //                     console.log("User is logged in");
-  //                     // this.router.navigateByUrl('/');
-  //                     this.router.navigate(['/user-page/users']);
-
-  //                 }
-  //             );
-  //     }
-  // }
+    
 }

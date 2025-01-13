@@ -5,5 +5,5 @@ export class User {
     password: string = '';
     expiresIn: number | undefined;
 
-    idToken: string = '';
+    token: string = '';
 }
