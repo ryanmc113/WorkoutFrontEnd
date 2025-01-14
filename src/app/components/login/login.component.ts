@@ -31,7 +31,7 @@ export class LoginComponent {
         this.authService.login(val.email, val.password)
             .subscribe(
                 () => {
-                    this.router.navigate(['/user-page/users']);
+                    this.router.navigate(['/dashboard']);
                 }
             );
     }
