@@ -11,16 +11,18 @@ import { UserService } from '../../services/user-service.service';
   imports: [CommonModule],
   styleUrls: ['./user-list.component.css']
 })
-export class UserListComponent implements OnInit {
+// export class UserListComponent implements OnInit {
+  export class UserListComponent  {
+
 
   users: User[] = [];
 
   constructor(private userService: UserService) {
   }
 
-  ngOnInit() {
-    this.userService.findAll().subscribe((data: User[]) => {
-      this.users = data;
-    });
-  }
+  // ngOnInit() {
+  //   this.userService.findAll().subscribe((data: User[]) => {
+  //     this.users = data;
+  //   });
+  // }
 }

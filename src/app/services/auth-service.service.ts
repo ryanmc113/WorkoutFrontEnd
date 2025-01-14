@@ -28,6 +28,7 @@ export class AuthServiceService {
       return this.http.post<User>(this.usersUrl+'/auth/login', {email, password})
       .pipe(
         tap(res => {
+          console.log(res);
           this.setSession(res);
           this.loginService.setLoggedIn(true);
         }),
@@ -39,6 +40,8 @@ export class AuthServiceService {
       const expiresAt = moment().add(authResult.expiresIn,'second');
       
       if (isPlatformBrowser(this.platformId)) {
+        localStorage.setItem('token', authResult.token);
+        localStorage.setItem("expiresIn", JSON.stringify(expiresAt.valueOf()) );
         sessionStorage.setItem('token', authResult.token);
         sessionStorage.setItem("expiresIn", JSON.stringify(expiresAt.valueOf()) );
       }
@@ -47,8 +50,8 @@ export class AuthServiceService {
 
   logout() {
     if (isPlatformBrowser(this.platformId)) {
-      sessionStorage.removeItem('id_token');
-      sessionStorage.removeItem('expires_at');
+      localStorage.removeItem('id_token');
+      localStorage.removeItem('expires_at');
     }
   }
 
@@ -63,14 +66,14 @@ export class AuthServiceService {
   }
 
   getExpiration() {
-     var expiresAt = moment().subtract(1, 'days').format();
-     if (isPlatformBrowser(this.platformId)) {
-      const expiration = sessionStorage.getItem("expires_at") || '';
-       expiresAt = JSON.parse(expiration);
-       return moment(expiresAt);
-      }else{
+    var expiresAt = moment().subtract(1, 'days').format();
+    if (isPlatformBrowser(this.platformId)) {
+      const expiration = localStorage.getItem("expires_at") || '';
+      expiresAt = JSON.parse(expiration);
+      return moment(expiresAt);
+    }else{
         return expiresAt;
-      }
+    }
       
   }    
 }

@@ -11,6 +11,7 @@ import { UserListComponent } from './components/user-list/user-list.component';
 import { UserFormComponent } from './components/user-form/user-form.component';
 import { UserService } from './services/user-service.service';
 import { UserPageComponent } from './components/user-page/user-page.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { UserPageComponent } from './components/user-page/user-page.component';
     SignInButtonComponent,
     UserPageComponent,
     UserListComponent,
-    UserFormComponent ],
+    UserFormComponent,
+    DashboardComponent],
   imports: [
     BrowserModule,
     CommonModule,
