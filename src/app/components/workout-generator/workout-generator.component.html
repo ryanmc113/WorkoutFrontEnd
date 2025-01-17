@@ -1,1 +1,37 @@
-<p>workout-generator works!</p>
+<form>
+    <div class="flex justify-end mr-5">
+        <a href="" class="bg-blue-700 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">Generate</a>
+    </div>
+    <div #container>
+        <div class="original-div">
+            <div class="flex justify-center items-center">
+                <div class="mb-5">
+                    <label for="base-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Exercise</label>
+                    <input type="text" id="base-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                </div>
+                <div class="mb-5 ml-4">
+                    <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an option</label>
+                    <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option selected>Choose Type</option>
+                        <option value="US">Strength</option>
+                        <option value="CA">Cardio</option>
+                    </select>
+                </div>
+                <!-- <div class="mb-5 w-1/6 ml-4">
+                    <label for="base-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Sets/Time</label>
+                    <input type="text" id="base-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                </div>
+                <div class="ml-4 mr- 4 text-5xl text-white items-centers">X</div>
+                <div class="mb-5 w-1/6 ml-4">
+                    <label for="base-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Reps</label>
+                    <input type="text" id="base-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                </div> -->
+            </div>
+        </div>
+    </div>
+    <div class="flex justify-center items-center mb-6">
+        <a (click) = "appendDivCopy()" class="bg-gray-300 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+            <i class="fa-solid fa-plus"></i>Add Exercise
+          </a>
+    </div>
+</form>

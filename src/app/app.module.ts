@@ -12,7 +12,7 @@ import { UserFormComponent } from './components/user-form/user-form.component';
 import { UserService } from './services/user-service.service';
 import { UserPageComponent } from './components/user-page/user-page.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-
+import { WorkoutGeneratorComponent } from './components/workout-generator/workout-generator.component';
 
 @NgModule({
   declarations: [ 
@@ -22,11 +22,12 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     UserPageComponent,
     UserListComponent,
     UserFormComponent,
-    DashboardComponent],
+    DashboardComponent,
+    WorkoutGeneratorComponent],
   imports: [
     BrowserModule,
     CommonModule,
-    FormsModule, // Ensure FormsModule is imported here
+    FormsModule, 
     HttpClientModule,
     AppRoutingModule
   ],
