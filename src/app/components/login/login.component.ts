@@ -21,9 +21,6 @@ export class LoginComponent {
     this.user = new User();
   }
 
-  // ngOnInit() {
-  //   this.username = "John";
-  // }
 
   login() {
     const val = this.user;
@@ -35,5 +32,5 @@ export class LoginComponent {
                 }
             );
     }
-}
+  }
 }
