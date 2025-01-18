@@ -1,5 +1,5 @@
 import { Component, Renderer2, ElementRef, ViewChild } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, FormGroup, FormArray, Validators, FormBuilder } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { WorkoutGeneratorService } from '../../services/workout-generator.service';
 import { WorkoutGenerator } from '../../model/workout-generator';
@@ -13,12 +13,28 @@ import { WorkoutGenerator } from '../../model/workout-generator';
 })
 export class WorkoutGeneratorComponent {
   @ViewChild('container') container!: ElementRef;
+  form: FormGroup = new FormGroup({});
+
+  formData: any = [];
+  exercise : {name: string, type: string} = {name: '', type: ''};
+  exerciseList: any = [];
   workoutGen: WorkoutGenerator = new WorkoutGenerator();
 
   constructor(private renderer: Renderer2, 
               private el: ElementRef, 
               private router: Router, 
-              private workoutGenService: WorkoutGeneratorService) {}
+              private workoutGenService: WorkoutGeneratorService,
+              private fb: FormBuilder) {
+
+              this.form = this.fb.group({
+                exerciseList: this.fb.array([])
+              });
+    }
+
+
+  get exerciseListArray() {
+    return this.form.get('exerciseList') as FormArray;
+  }
 
 
   generateWorkout() {
