@@ -1,53 +1,73 @@
-import { Component, Renderer2, ElementRef, ViewChild } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, Renderer2, ElementRef, ViewChild, AfterViewInit, OnInit } from '@angular/core';
+import { FormsModule, FormGroup, FormArray, Validators, FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { WorkoutGeneratorService } from '../../services/workout-generator.service';
 import { WorkoutGenerator } from '../../model/workout-generator';
+import { CommonModule } from '@angular/common';
+import { MatFormFieldModule } from '@angular/material/form-field'; // Import MatFormFieldModule
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 
 
 @Component({
   selector: 'app-workout-generator',
-  imports: [FormsModule, RouterLink],
+  imports: [FormsModule, 
+            RouterLink, 
+            CommonModule, 
+            ReactiveFormsModule, 
+            MatFormFieldModule, 
+            MatSelectModule, 
+            MatOptionModule, 
+            MatIconModule,
+            MatInputModule],
   templateUrl: './workout-generator.component.html',
   styleUrl: './workout-generator.component.css'
 })
-export class WorkoutGeneratorComponent {
+export class WorkoutGeneratorComponent implements OnInit, AfterViewInit {
   @ViewChild('container') container!: ElementRef;
-  workoutGen: WorkoutGenerator = new WorkoutGenerator();
+  form: FormGroup;
 
   constructor(private renderer: Renderer2, 
               private el: ElementRef, 
               private router: Router, 
-              private workoutGenService: WorkoutGeneratorService) {}
+              private workoutGenService: WorkoutGeneratorService,
+              private fb: FormBuilder) {
 
+                this.form = this.fb.group({
+                  exercises: this.fb.array([])
+                });
+    }
 
-  generateWorkout() {
-    const val = this.workoutGen;
-    // if (val.length) {
-    //     this.workoutGenService
-    //         .subscribe(
-    //             () => {
-    //                 this.router.navigate(['/dashboard']);
-    //             }
-    //         );
-    // }
-  }
+    ngOnInit() {
+      this.addExercise(); // Add an initial lesson to the form array
+    }
+  
 
-  appendDivCopy() {
-    // Find the original div we want to copy
-    const originalDiv = this.container.nativeElement.querySelector('.original-div');
+    get exercises() {
+      return this.form.controls["exercises"] as FormArray;
+    }
+
+    addExercise() {
+      const exerciseForm = this.fb.group({
+          exercise: ['', Validators.required],
+          type: ['beginner', Validators.required]
+      });
     
-    // Create a new div element
-    const copiedDiv = this.renderer.createElement('div');
-    
-    // Copy the contents of the original div to the new one
-    this.renderer.setProperty(copiedDiv, 'innerHTML', originalDiv.innerHTML);
-    
-    // Optionally, add a class to the new div to identify it
-    this.renderer.addClass(copiedDiv, 'copied-div');
+      this.exercises.push(exerciseForm);
+    }
 
-    // Append the copied div to the container
-    this.renderer.appendChild(this.container.nativeElement, copiedDiv);
+    deleteExercise(lessonIndex: number) {
+      this.exercises.removeAt(lessonIndex);
+   }
+
+  ngAfterViewInit() {
+    // Access the nativeElement here
+    if (this.container) {
+      const nativeElement = this.container.nativeElement;
+      // Perform operations on the nativeElement
+    }
   }
 
 }
