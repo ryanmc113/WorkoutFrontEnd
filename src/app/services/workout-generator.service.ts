@@ -17,6 +17,7 @@ export class WorkoutGeneratorService {
 
     generateWorkout(WorkoutGenerator: WorkoutGenerator) {
       console.log(WorkoutGenerator);
+      console.log("line 24 workout-generator.service.ts");
         return this.http.post<WorkoutGenerator[]>(this.url+'/generate', WorkoutGenerator)
         .pipe(
           tap(res => {

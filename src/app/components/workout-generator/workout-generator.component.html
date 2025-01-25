@@ -1,37 +1,135 @@
-<form>
+<style>
+    .example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+::ng-deep .mat-form-field .mat-input-element {
+    color: slategray;
+}
+::ng-deep .mat-form-field .mat-form-field-label {
+    color: slategray!important;
+}
+::ng-deep .mat-form-field .mat-form-field-underline {
+    background-color: slategray;
+}
+::ng-deep .mat-form-field .mat-form-field-ripple {
+    background-color: slategray;
+}
+::ng-deep .mat-form-field .mat-form-field-required-marker {
+    color: slategray;
+}
+
+
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+    color: #ff884d!important;
+}
+::ng-deep .mat-form-field.mat-focused .mat-form-field-ripple {
+    background-color: #ff884d;
+}
+::ng-deep .mat-form-field.mat-focused .mat-form-field-required-marker {
+    color: #ff884d;
+}
+::ng-deep .mat-form-field.mat-focused .mat-input-element {
+    color: #ff884d;
+}
+
+
+
+::ng-deep .mat-form-field.mat-form-field-invalid .mat-input-element {
+    color: #ff33cc;
+}
+::ng-deep .mat-form-field.mat-form-field-invalid .mat-form-field-label {
+    color: #ff33cc!important;
+}
+::ng-deep .mat-form-field.mat-form-field-invalid .mat-form-field-label .mat-form-field-required-marker {
+    color: #ff33cc;
+}
+::ng-deep .mat-form-field.mat-form-field-invalid .mat-form-field-ripple {
+    background-color: #ff33cc;
+}
+</style>
+
+<!-- <form id="myForm" [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="flex justify-end mr-5">
         <a href="" class="bg-blue-700 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">Generate</a>
     </div>
-    <div #container>
-        <div class="original-div">
-            <div class="flex justify-center items-center">
-                <div class="mb-5">
-                    <label for="base-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Exercise</label>
-                    <input [(ngModel)]="exercise.name" type="text" id="base-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                </div>
-                <div class="mb-5 ml-4">
-                    <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an option</label>
-                    <select [(ngModel)]="exercise.type" id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option selected>Choose Type</option>
-                        <option value="US">Strength</option>
-                        <option value="CA">Cardio</option>
-                    </select>
-                </div>
-                <!-- <div class="mb-5 w-1/6 ml-4">
-                    <label for="base-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Sets/Time</label>
-                    <input type="text" id="base-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                </div>
-                <div class="ml-4 mr- 4 text-5xl text-white items-centers">X</div>
-                <div class="mb-5 w-1/6 ml-4">
-                    <label for="base-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Reps</label>
-                    <input type="text" id="base-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                </div> -->
+    <div>
+        <div >
+            <div class="original-div">
+                <div class="flex justify-center items-center">
+                    <div class="mb-5">
+                        <label for="base-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Exercise</label>
+                        <input [(ngModel)]="exercise.name" type="text" name="name-{{i}}" id="base-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    </div>
+                    <div class="mb-5 ml-4">
+                        <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an option</label>
+                        <select [(ngModel)]="exercise.type" name="type-{{i}}" id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option selected>Choose Type</option>
+                            <option value="US">Strength</option>
+                            <option value="CA">Cardio</option>
+                        </select>
+                    </div> -->
+                    <!-- <div class="ml-4 mt-2">
+                        <a (click)="removeExercise(i)" type="button" class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                            <span class="sr-only">Close menu</span>
+                            <svg class="h-6 w-6"  fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </a>
+                    </div> -->
+                    <!-- <div class="mb-5 w-1/6 ml-4">
+                        <label for="base-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Sets/Time</label>
+                        <input type="text" id="base-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    </div>
+                    <div class="ml-4 mr- 4 text-5xl text-white items-centers">X</div>
+                    <div class="mb-5 w-1/6 ml-4">
+                        <label for="base-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Reps</label>
+                        <input type="text" id="base-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    </div> -->
+                <!-- </div>
             </div>
         </div>
     </div>
     <div class="flex justify-center items-center mb-6">
         <a (click) = "appendDivCopy()" class="bg-gray-300 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
             <i class="fa-solid fa-plus"></i>Add Exercise
-          </a>
+        </a>
     </div>
-</form>
+</form> -->
+<div class="flex justify-end mr-5">
+    <a href="" class="bg-blue-700 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">Generate</a>
+</div>
+<div class="flex justify-center items-center mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl dark:text-white">
+    <h3>Add Exercises:</h3>
+</div>
+<div class="flex justify-center items-center" [formGroup]="form">
+    <ng-container formArrayName="exercises">
+        <ng-container *ngFor="let exerciseForm of exercises.controls; let i = index" [formGroupName]="i">
+            <mat-form-field class="mr-4">
+                <input matInput
+                        formControlName="exercise"
+                        placeholder="Exercise">
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="mr-4">
+                <mat-select formControlName="type"
+                        placeholder="Exercise Type">
+                    <mat-option value="aerobic">Cardio/Aerobic</mat-option>
+                    <mat-option value="stregnth">Strength</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-icon class="delete-btn" (click)="deleteExercise(i)">
+                delete_forever</mat-icon>
+        </ng-container>
+    </ng-container>
+  
+    <button mat-mini-fab (click)="addExercise()">
+        <mat-icon class="add-course-btn">add</mat-icon>
+    </button>
+
+</div>

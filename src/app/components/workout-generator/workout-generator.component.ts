@@ -1,24 +1,33 @@
-import { Component, Renderer2, ElementRef, ViewChild } from '@angular/core';
-import { FormsModule, FormGroup, FormArray, Validators, FormBuilder } from '@angular/forms';
+import { Component, Renderer2, ElementRef, ViewChild, AfterViewInit, OnInit } from '@angular/core';
+import { FormsModule, FormGroup, FormArray, Validators, FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { WorkoutGeneratorService } from '../../services/workout-generator.service';
 import { WorkoutGenerator } from '../../model/workout-generator';
+import { CommonModule } from '@angular/common';
+import { MatFormFieldModule } from '@angular/material/form-field'; // Import MatFormFieldModule
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 
 
 @Component({
   selector: 'app-workout-generator',
-  imports: [FormsModule, RouterLink],
+  imports: [FormsModule, 
+            RouterLink, 
+            CommonModule, 
+            ReactiveFormsModule, 
+            MatFormFieldModule, 
+            MatSelectModule, 
+            MatOptionModule, 
+            MatIconModule,
+            MatInputModule],
   templateUrl: './workout-generator.component.html',
   styleUrl: './workout-generator.component.css'
 })
-export class WorkoutGeneratorComponent {
+export class WorkoutGeneratorComponent implements OnInit, AfterViewInit {
   @ViewChild('container') container!: ElementRef;
-  form: FormGroup = new FormGroup({});
-
-  formData: any = [];
-  exercise : {name: string, type: string} = {name: '', type: ''};
-  exerciseList: any = [];
-  workoutGen: WorkoutGenerator = new WorkoutGenerator();
+  form: FormGroup;
 
   constructor(private renderer: Renderer2, 
               private el: ElementRef, 
@@ -26,44 +35,39 @@ export class WorkoutGeneratorComponent {
               private workoutGenService: WorkoutGeneratorService,
               private fb: FormBuilder) {
 
-              this.form = this.fb.group({
-                exerciseList: this.fb.array([])
-              });
+                this.form = this.fb.group({
+                  exercises: this.fb.array([])
+                });
     }
 
+    ngOnInit() {
+      this.addExercise(); // Add an initial lesson to the form array
+    }
+  
 
-  get exerciseListArray() {
-    return this.form.get('exerciseList') as FormArray;
-  }
+    get exercises() {
+      return this.form.controls["exercises"] as FormArray;
+    }
 
-
-  generateWorkout() {
-    const val = this.workoutGen;
-    // if (val.length) {
-    //     this.workoutGenService
-    //         .subscribe(
-    //             () => {
-    //                 this.router.navigate(['/dashboard']);
-    //             }
-    //         );
-    // }
-  }
-
-  appendDivCopy() {
-    // Find the original div we want to copy
-    const originalDiv = this.container.nativeElement.querySelector('.original-div');
+    addExercise() {
+      const exerciseForm = this.fb.group({
+          exercise: ['', Validators.required],
+          type: ['beginner', Validators.required]
+      });
     
-    // Create a new div element
-    const copiedDiv = this.renderer.createElement('div');
-    
-    // Copy the contents of the original div to the new one
-    this.renderer.setProperty(copiedDiv, 'innerHTML', originalDiv.innerHTML);
-    
-    // Optionally, add a class to the new div to identify it
-    this.renderer.addClass(copiedDiv, 'copied-div');
+      this.exercises.push(exerciseForm);
+    }
 
-    // Append the copied div to the container
-    this.renderer.appendChild(this.container.nativeElement, copiedDiv);
+    deleteExercise(lessonIndex: number) {
+      this.exercises.removeAt(lessonIndex);
+   }
+
+  ngAfterViewInit() {
+    // Access the nativeElement here
+    if (this.container) {
+      const nativeElement = this.container.nativeElement;
+      // Perform operations on the nativeElement
+    }
   }
 
 }
