@@ -70,4 +70,11 @@ export class WorkoutGeneratorComponent implements OnInit, AfterViewInit {
     }
   }
 
+  onSubmit() {
+    if (this.form.valid) {
+      console.log('Form submitted', this.form.value);
+      // Your submission logic here
+    }
+  }
+
 }

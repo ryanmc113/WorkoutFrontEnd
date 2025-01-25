@@ -1,60 +1,3 @@
-<style>
-    .example-form {
-  min-width: 150px;
-  max-width: 500px;
-  width: 100%;
-}
-
-.example-full-width {
-  width: 100%;
-}
-
-::ng-deep .mat-form-field .mat-input-element {
-    color: slategray;
-}
-::ng-deep .mat-form-field .mat-form-field-label {
-    color: slategray!important;
-}
-::ng-deep .mat-form-field .mat-form-field-underline {
-    background-color: slategray;
-}
-::ng-deep .mat-form-field .mat-form-field-ripple {
-    background-color: slategray;
-}
-::ng-deep .mat-form-field .mat-form-field-required-marker {
-    color: slategray;
-}
-
-
-::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
-    color: #ff884d!important;
-}
-::ng-deep .mat-form-field.mat-focused .mat-form-field-ripple {
-    background-color: #ff884d;
-}
-::ng-deep .mat-form-field.mat-focused .mat-form-field-required-marker {
-    color: #ff884d;
-}
-::ng-deep .mat-form-field.mat-focused .mat-input-element {
-    color: #ff884d;
-}
-
-
-
-::ng-deep .mat-form-field.mat-form-field-invalid .mat-input-element {
-    color: #ff33cc;
-}
-::ng-deep .mat-form-field.mat-form-field-invalid .mat-form-field-label {
-    color: #ff33cc!important;
-}
-::ng-deep .mat-form-field.mat-form-field-invalid .mat-form-field-label .mat-form-field-required-marker {
-    color: #ff33cc;
-}
-::ng-deep .mat-form-field.mat-form-field-invalid .mat-form-field-ripple {
-    background-color: #ff33cc;
-}
-</style>
-
 <!-- <form id="myForm" [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="flex justify-end mr-5">
         <a href="" class="bg-blue-700 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">Generate</a>
@@ -103,33 +46,39 @@
     </div>
 </form> -->
 <div class="flex justify-end mr-5">
-    <a href="" class="bg-blue-700 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">Generate</a>
+    <button href="#" (click)="onSubmit()" class="bg-blue-700 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">Generate</button>
 </div>
 <div class="flex justify-center items-center mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl dark:text-white">
     <h3>Add Exercises:</h3>
 </div>
-<div class="flex justify-center items-center" [formGroup]="form">
-    <ng-container formArrayName="exercises">
-        <ng-container *ngFor="let exerciseForm of exercises.controls; let i = index" [formGroupName]="i">
-            <mat-form-field class="mr-4">
-                <input matInput
-                        formControlName="exercise"
-                        placeholder="Exercise">
-            </mat-form-field>
-            <mat-form-field appearance="fill" class="mr-4">
-                <mat-select formControlName="type"
-                        placeholder="Exercise Type">
-                    <mat-option value="aerobic">Cardio/Aerobic</mat-option>
-                    <mat-option value="stregnth">Strength</mat-option>
-                </mat-select>
-            </mat-form-field>
-            <mat-icon class="delete-btn" (click)="deleteExercise(i)">
-                delete_forever</mat-icon>
+<div class="add-lessons-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="flex justify-center items-center" [formGroup]="form">
+        <ng-container formArrayName="exercises">
+            <ng-container *ngFor="let exerciseForm of exercises.controls; let i = index" [formGroupName]="i">
+                <mat-form-field class="mr-4 w-1/6">
+                    <input matInput
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            formControlName="exercise"
+                            placeholder="Exercise">
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="mr-4 w-1/6">
+                    <mat-select formControlName="type"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Exercise Type">
+                        <mat-option value="aerobic">Cardio/Aerobic</mat-option>
+                        <mat-option value="stregnth">Strength</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div (click)="deleteExercise(i)" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                    <mat-icon class="delete-btn">
+                        delete_forever</mat-icon>
+                </div>
+            </ng-container>
         </ng-container>
-    </ng-container>
-  
-    <button mat-mini-fab (click)="addExercise()">
-        <mat-icon class="add-course-btn">add</mat-icon>
-    </button>
-
+      
+        <button mat-mini-fab (click)="addExercise()" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+            <mat-icon class="add-course-btn">add</mat-icon>
+        </button>
+    
+    </div>
 </div>
