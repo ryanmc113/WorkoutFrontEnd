@@ -9,6 +9,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { min } from 'moment';
 
 
 @Component({
@@ -51,8 +52,8 @@ export class WorkoutGeneratorComponent implements OnInit, AfterViewInit {
 
     addExercise() {
       const exerciseForm = this.fb.group({
-          exercise: ['', Validators.required],
-          type: ['beginner', Validators.required]
+          name: ['', Validators.required],
+          type: ['', Validators.required]
       });
     
       this.exercises.push(exerciseForm);
@@ -62,17 +63,38 @@ export class WorkoutGeneratorComponent implements OnInit, AfterViewInit {
       this.exercises.removeAt(lessonIndex);
    }
 
-  ngAfterViewInit() {
-    // Access the nativeElement here
-    if (this.container) {
-      const nativeElement = this.container.nativeElement;
-      // Perform operations on the nativeElement
+    ngAfterViewInit() {
+      // Access the nativeElement here
+      if (this.container) {
+        const nativeElement = this.container.nativeElement;
+        // Perform operations on the nativeElement
+      }
     }
+  Workout = {
+    id: 0,
+    date: new Date(),
+    time: new Date().getTime(),
+    hours: 1,
+    minutes: 32,
+    seconds: 33,
+    comment: 'this is being sent',
+    workoutExercises: []
   }
 
   onSubmit() {
+    console.log(this.form.value);
+    this.Workout.workoutExercises = this.form.value.exercises;
+    console.log(this.Workout);
     if (this.form.valid) {
-      console.log('Form submitted', this.form.value);
+      this.workoutGenService.generateWorkout(this.Workout).subscribe(
+        response => {
+          console.log('Workout generated:', response);
+        },
+        error => {
+          console.error('Error generating workout:', error);
+        });
+
+      // this.workoutGenService.generateWorkout(this.exercises).subscribe(result => this.gotoUserList());
       // Your submission logic here
     }
   }

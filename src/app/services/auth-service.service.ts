@@ -42,8 +42,6 @@ export class AuthServiceService {
       if (isPlatformBrowser(this.platformId)) {
         localStorage.setItem('token', authResult.token);
         localStorage.setItem("expiresIn", JSON.stringify(expiresAt.valueOf()) );
-        sessionStorage.setItem('token', authResult.token);
-        sessionStorage.setItem("expiresIn", JSON.stringify(expiresAt.valueOf()) );
       }
 
   }          

@@ -55,10 +55,10 @@
     <div class="flex justify-center items-center" [formGroup]="form">
         <ng-container formArrayName="exercises">
             <ng-container *ngFor="let exerciseForm of exercises.controls; let i = index" [formGroupName]="i">
-                <mat-form-field class="mr-4 w-1/6">
+                <mat-form-field class="mr-4 w-1/6 bg-gray-50">
                     <input matInput
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            formControlName="exercise"
+                            formControlName="name"
                             placeholder="Exercise">
                 </mat-form-field>
                 <mat-form-field appearance="fill" class="mr-4 w-1/6">
@@ -66,7 +66,7 @@
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="Exercise Type">
                         <mat-option value="aerobic">Cardio/Aerobic</mat-option>
-                        <mat-option value="stregnth">Strength</mat-option>
+                        <mat-option value="strength">Strength</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <div (click)="deleteExercise(i)" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
