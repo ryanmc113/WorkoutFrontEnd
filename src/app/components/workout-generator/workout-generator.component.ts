@@ -94,8 +94,7 @@ export class WorkoutGeneratorComponent implements OnInit, AfterViewInit {
           console.error('Error generating workout:', error);
         });
 
-      // this.workoutGenService.generateWorkout(this.exercises).subscribe(result => this.gotoUserList());
-      // Your submission logic here
+      
     }
   }
 
