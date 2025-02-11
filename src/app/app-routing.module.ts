@@ -8,6 +8,7 @@ import { LoginComponent } from './components/login/login.component';
 import { UserPageComponent } from './components/user-page/user-page.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { WorkoutGeneratorComponent } from './components/workout-generator/workout-generator.component';
+import { BlogComponent } from './components/blog/blog.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -19,6 +20,7 @@ export const routes: Routes = [
    },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'workout-generator', component: WorkoutGeneratorComponent },
+  { path: 'blog', component: BlogComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];
 

@@ -30,7 +30,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     if (typeof window !== 'undefined') {
-      this.userSessionLoggedIn = sessionStorage.getItem('expiresIn') ? true : false;
+      this.userSessionLoggedIn = localStorage.getItem('expiresIn') ? true : false;
       console.log(localStorage.getItem('expiresIn'))
     }
   }

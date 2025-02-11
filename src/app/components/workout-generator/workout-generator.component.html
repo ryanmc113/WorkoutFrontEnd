@@ -1,3 +1,4 @@
+
 <!-- <form id="myForm" [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="flex justify-end mr-5">
         <a href="" class="bg-blue-700 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">Generate</a>
@@ -8,7 +9,7 @@
                 <div class="flex justify-center items-center">
                     <div class="mb-5">
                         <label for="base-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Exercise</label>
-                        <input [(ngModel)]="exercise.name" type="text" name="name-{{i}}" id="base-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <input [(ngModel)]="exercises.name" type="text" name="name" id="base-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     </div>
                     <div class="mb-5 ml-4">
                         <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an option</label>
@@ -17,16 +18,16 @@
                             <option value="US">Strength</option>
                             <option value="CA">Cardio</option>
                         </select>
-                    </div> -->
-                    <!-- <div class="ml-4 mt-2">
+                    </div>
+                    <div class="ml-4 mt-2">
                         <a (click)="removeExercise(i)" type="button" class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
                             <span class="sr-only">Close menu</span>
                             <svg class="h-6 w-6"  fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                             </svg>
                         </a>
-                    </div> -->
-                    <!-- <div class="mb-5 w-1/6 ml-4">
+                    </div>
+                    <div class="mb-5 w-1/6 ml-4">
                         <label for="base-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Sets/Time</label>
                         <input type="text" id="base-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     </div>
@@ -34,8 +35,8 @@
                     <div class="mb-5 w-1/6 ml-4">
                         <label for="base-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Reps</label>
                         <input type="text" id="base-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    </div> -->
-                <!-- </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -51,34 +52,51 @@
 <div class="flex justify-center items-center mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl dark:text-white">
     <h3>Add Exercises:</h3>
 </div>
-<div class="add-lessons-form" [formGroup]="form" (ngSubmit)="onSubmit()">
-    <div class="flex justify-center items-center" [formGroup]="form">
+<!-- <div class="add-lessons-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div [formGroup]="form">
         <ng-container formArrayName="exercises">
             <ng-container *ngFor="let exerciseForm of exercises.controls; let i = index" [formGroupName]="i">
-                <mat-form-field class="mr-4 w-1/6 bg-gray-50">
-                    <input matInput
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            formControlName="name"
-                            placeholder="Exercise">
-                </mat-form-field>
-                <mat-form-field appearance="fill" class="mr-4 w-1/6">
-                    <mat-select formControlName="type"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="Exercise Type">
-                        <mat-option value="aerobic">Cardio/Aerobic</mat-option>
-                        <mat-option value="strength">Strength</mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <div (click)="deleteExercise(i)" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
-                    <mat-icon class="delete-btn">
-                        delete_forever</mat-icon>
+                <div class="flex justify-center items-center" >
+                    <mat-form-field class="mr-4 w-1/6 ">
+                        <div class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <input matInput
+                                    class=""
+                                    formControlName="name"
+                                    placeholder="Exercise">
+                        </div>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" class="mr-4 w-1/6">
+                        <div class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <mat-select formControlName="type"
+                                    placeholder="Exercise Type">
+                                <mat-option value="aerobic">Cardio/Aerobic</mat-option>
+                                <mat-option value="strength">Strength</mat-option>
+                            </mat-select>
+                        </div>
+                    </mat-form-field>
+                    <div (click)="deleteExercise(i)" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                        <mat-icon class="delete-btn">
+                            delete_forever</mat-icon>
+                    </div>
                 </div>
             </ng-container>
         </ng-container>
-      
-        <button mat-mini-fab (click)="addExercise()" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
-            <mat-icon class="add-course-btn">add</mat-icon>
-        </button>
+      <div class="flex justify-center items-center mb-6">
+          <button mat-mini-fab (click)="addExercise()" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+              <mat-icon class="add-course-btn">add</mat-icon>
+          </button>
+      </div>
     
     </div>
-</div>
+</div> -->
+
+<form [formGroup]="myForm">
+    <div formArrayName="names">
+      <div *ngFor="let name of names.controls; let i = index">
+        <input [formControlName]="i" placeholder="Enter a name">
+        <button type="button" (click)="removeName(i)">Remove</button>
+      </div>
+    </div>
+  
+    <button type="button" (click)="addName()">Add Name</button>
+  </form>

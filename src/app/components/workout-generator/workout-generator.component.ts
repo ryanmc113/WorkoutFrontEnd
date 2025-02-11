@@ -28,7 +28,9 @@ import { min } from 'moment';
 })
 export class WorkoutGeneratorComponent implements OnInit, AfterViewInit {
   @ViewChild('container') container!: ElementRef;
-  form: FormGroup;
+  // form: FormGroup;
+  myForm: FormGroup;
+
 
   constructor(private renderer: Renderer2, 
               private el: ElementRef, 
@@ -36,32 +38,38 @@ export class WorkoutGeneratorComponent implements OnInit, AfterViewInit {
               private workoutGenService: WorkoutGeneratorService,
               private fb: FormBuilder) {
 
-                this.form = this.fb.group({
-                  exercises: this.fb.array([])
+                // this.form = this.fb.group({
+                //   exercises: this.fb.array([])
+                // });
+                this.myForm = this.fb.group({
+                  names: this.fb.array([])
                 });
     }
 
     ngOnInit() {
-      this.addExercise(); // Add an initial lesson to the form array
+      // this.addExercise(); // Add an initial lesson to the form array
+      this.myForm = this.fb.group({
+        names: this.fb.array([])
+      });
     }
   
 
-    get exercises() {
-      return this.form.controls["exercises"] as FormArray;
-    }
+  //   get exercises() {
+  //     return this.form.controls["exercises"] as FormArray;
+  //   }
 
-    addExercise() {
-      const exerciseForm = this.fb.group({
-          name: ['', Validators.required],
-          type: ['', Validators.required]
-      });
+  //   addExercise() {
+  //     const exerciseForm = this.fb.group({
+  //         name: ['', Validators.required],
+  //         type: ['', Validators.required]
+  //     });
     
-      this.exercises.push(exerciseForm);
-    }
+  //     this.exercises.push(exerciseForm);
+  //   }
 
-    deleteExercise(lessonIndex: number) {
-      this.exercises.removeAt(lessonIndex);
-   }
+  //   deleteExercise(lessonIndex: number) {
+  //     this.exercises.removeAt(lessonIndex);
+  //  }
 
     ngAfterViewInit() {
       // Access the nativeElement here
@@ -70,32 +78,44 @@ export class WorkoutGeneratorComponent implements OnInit, AfterViewInit {
         // Perform operations on the nativeElement
       }
     }
-  Workout = {
-    id: 0,
-    date: new Date(),
-    time: new Date().getTime(),
-    hours: 1,
-    minutes: 32,
-    seconds: 33,
-    comment: 'this is being sent',
-    workoutExercises: []
-  }
 
-  onSubmit() {
-    console.log(this.form.value);
-    this.Workout.workoutExercises = this.form.value.exercises;
-    console.log(this.Workout);
-    if (this.form.valid) {
-      this.workoutGenService.generateWorkout(this.Workout).subscribe(
-        response => {
-          console.log('Workout generated:', response);
-        },
-        error => {
-          console.error('Error generating workout:', error);
-        });
+  //   Workout = {
+  //     id: 0,
+  //     date: new Date(),
+  //     time: new Date().getTime(),
+  //     hours: 1,
+  //     minutes: 32,
+  //     seconds: 33,
+  //     comment: 'this is being sent',
+  //     workoutExercises: []
+  //   }
 
-      
+    onSubmit() {
+      // console.log(this.form.value);
+      // this.Workout.workoutExercises = this.form.value.exercises;
+      // console.log(this.Workout);
+      // if (this.form.valid) {
+      //   this.workoutGenService.generateWorkout(this.Workout).subscribe(
+      //     response => {
+      //       console.log('Workout generated:', response);
+      //     },
+      //     error => {
+      //       console.error('Error generating workout:', error);
+      //     });
+
+        
+      // }
     }
+
+  get names() {
+    return (this.myForm.get('names') as FormArray);
   }
 
+  addName() {
+    this.names.push(this.fb.control(''));
+  }
+
+  removeName(index: number) {
+    this.names.removeAt(index);
+  }
 }
