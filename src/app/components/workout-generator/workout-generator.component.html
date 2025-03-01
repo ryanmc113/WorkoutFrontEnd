@@ -52,7 +52,7 @@
 <div class="flex justify-center items-center mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl dark:text-white">
     <h3>Add Exercises:</h3>
 </div>
-<!-- <div class="add-lessons-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+<div class="add-lessons-form" [formGroup]="form" (ngSubmit)="onSubmit()">
     <div [formGroup]="form">
         <ng-container formArrayName="exercises">
             <ng-container *ngFor="let exerciseForm of exercises.controls; let i = index" [formGroupName]="i">
@@ -88,15 +88,4 @@
       </div>
     
     </div>
-</div> -->
-
-<form [formGroup]="myForm">
-    <div formArrayName="names">
-      <div *ngFor="let name of names.controls; let i = index">
-        <input [formControlName]="i" placeholder="Enter a name">
-        <button type="button" (click)="removeName(i)">Remove</button>
-      </div>
-    </div>
-  
-    <button type="button" (click)="addName()">Add Name</button>
-  </form>
+</div>

@@ -4,6 +4,8 @@ import { LoginServiceService } from '../../services/login-service.service';
 import { RouterModule } from '@angular/router';
 import { AuthServiceService } from '../../services/auth-service.service';
 import { BehaviorSubject } from 'rxjs';
+import { CookieService } from 'ngx-cookie-service';
+
 
 
 
@@ -20,7 +22,9 @@ export class HeaderComponent implements OnInit {
   public userSessionLoggedIn = false;
 
    constructor(@Inject(PLATFORM_ID) private platformId: Object, 
-                private loginService: LoginServiceService, private authService: AuthServiceService) {
+                private loginService: LoginServiceService, 
+                private authService: AuthServiceService,
+                private cookieService: CookieService) {
                   this.loginService.isLoggedIn.subscribe(loggedIn => {
                     this.userLoggedIn = loggedIn;
                     this.userSessionLoggedIn = loggedIn;
@@ -30,8 +34,12 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     if (typeof window !== 'undefined') {
-      this.userSessionLoggedIn = localStorage.getItem('expiresIn') ? true : false;
-      console.log(localStorage.getItem('expiresIn'))
+      if(this.cookieService.get('jwt_token')){
+        if(this.cookieService.get('jwt_token')){
+          this.userLoggedIn = true;
+        }
+      }
+      console.log(this.cookieService.get('jwt_token'))
     }
   }
 

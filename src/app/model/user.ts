@@ -6,4 +6,5 @@ export class User {
     expiresIn: number | undefined;
 
     token: string = '';
+    cookie: string = '';
 }

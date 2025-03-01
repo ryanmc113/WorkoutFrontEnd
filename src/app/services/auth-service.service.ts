@@ -7,6 +7,7 @@ import { tap, shareReplay } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
 import { LoginServiceService } from './login-service.service';
+import { CookieService } from 'ngx-cookie-service';
 
 
 
@@ -19,7 +20,11 @@ export class AuthServiceService {
   private loggedIn = false
 
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object,private http: HttpClient, private loginService: LoginServiceService) {
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private http: HttpClient, 
+    private loginService: LoginServiceService,
+    private cookieService: CookieService) {
     this.usersUrl = 'http://localhost:8080';
 
   }
@@ -29,8 +34,12 @@ export class AuthServiceService {
       .pipe(
         tap(res => {
           console.log(res);
+          const expirationDate = new Date();
+          expirationDate.setHours(expirationDate.getHours() + 1); 
+          this.cookieService.set('jwt_token', res.token, { expires: expirationDate, path: '/' , secure: true });
           this.setSession(res);
           this.loginService.setLoggedIn(true);
+          console.log(this.cookieService.get('jwt_token'));
         }),
         shareReplay()
       );
