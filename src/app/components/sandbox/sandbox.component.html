@@ -1,0 +1,16 @@
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+    <div formArrayName="names">
+      <div *ngFor="let name of names.controls; let i = index">
+        <div [formControlName]="i">
+            <input  name="name" placeholder="Enter a name">
+            <select name="type" id="">
+                <option value="US">Strength</option>
+                <option value="CA">Cardio</option>
+            </select>
+            <button type="button" (click)="removeName(i)">Remove</button>
+          </div>
+        </div>
+    </div>
+  
+    <button type="button" (click)="addName()">Add Name</button>
+</form>

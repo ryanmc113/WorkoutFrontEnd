@@ -1,0 +1,13 @@
+#mat-select-0-panel {
+    background-color: #f9fafb !important; /* bg-gray-50 */
+    border: 1px solid #d1d5db !important; /* border-gray-300 */
+    color: #111827 !important; /* text-gray-900 */
+    font-size: 0.875rem !important; /* text-sm */
+    border-radius: 0.5rem !important; /* rounded-lg */
+    padding: 0.625rem !important; /* p-2.5 */
+    width: 100% !important; /* w-full */
+    display: block !important; /* block */
+    outline: none !important;
+    border-color: #3b82f6 !important; /* focus:border-blue-500 */
+    /* ring-color: #3b82f6 !important; focus:ring-blue-500 */
+}

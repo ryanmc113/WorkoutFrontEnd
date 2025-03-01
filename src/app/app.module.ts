@@ -17,6 +17,7 @@ import { UserService } from './services/user-service.service';
 import { UserPageComponent } from './components/user-page/user-page.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { WorkoutGeneratorComponent } from './components/workout-generator/workout-generator.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [ 
@@ -40,7 +41,7 @@ import { WorkoutGeneratorComponent } from './components/workout-generator/workou
     MatButtonModule, // Ensure MatButtonModule is imported here 
     AppRoutingModule
   ],
-  providers: [UserService],
+  providers: [UserService, CookieService],
   bootstrap:    [ AppComponent ]
 })
 export class AppModule { }
