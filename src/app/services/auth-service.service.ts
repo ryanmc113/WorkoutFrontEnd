@@ -39,7 +39,6 @@ export class AuthServiceService {
           this.cookieService.set('jwt_token', res.token, { expires: expirationDate, path: '/' , secure: true });
           this.setSession(res);
           this.loginService.setLoggedIn(true);
-          console.log(this.cookieService.get('jwt_token'));
         }),
         shareReplay()
       );

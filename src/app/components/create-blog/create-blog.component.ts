@@ -10,11 +10,39 @@ import { CreateBlogService } from '../../services/create-blog.service';
   templateUrl: './create-blog.component.html',
   styleUrl: './create-blog.component.css'
 })
+
 export class CreateBlogComponent {
   blogForm: FormGroup;
   content = new FormControl('');
+  private hour = 0;
+  private minute = 0;
   // items = this.blogService.getItems();
 
+  incrementHour(){
+    if(this.minute === 12){
+      this.minute = 0;
+    }
+    else{
+      this.minute++;
+    }
+  }
+
+  decrementHour(){
+    
+  }
+
+  incrementMinute(){
+    if(this.minute === 59){
+      this.minute = 0;
+    }
+    else{
+      this.minute++;
+    }
+  }
+
+  decrementMinute(){
+
+  }
   
 
   constructor(
@@ -41,9 +69,8 @@ export class CreateBlogComponent {
 
   onSubmit(): void {
     // Process checkout data herev
-    console.log('party')
-    console.log(this.blogForm.value);
     if(this.blogForm !== undefined) {
+      console.log(this.blogForm.value.tag);
       console.warn('Your order has been submitted', this.blogForm.value);
       if (this.blogForm.valid) {
         this.createBlogService.saveBlog(this.blogForm.value).subscribe(

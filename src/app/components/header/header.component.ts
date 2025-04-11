@@ -33,13 +33,19 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(typeof window);
     if (typeof window !== 'undefined') {
+      console.log(this.cookieService.get('jwt_token'))
       if(this.cookieService.get('jwt_token')){
         if(this.cookieService.get('jwt_token')){
           this.userLoggedIn = true;
+          this.userSessionLoggedIn =
+          this.authService.isLoggedIn();
         }
       }
+      console.log('before party')
       console.log(this.cookieService.get('jwt_token'))
+      console.log('party')
     }
   }
 
